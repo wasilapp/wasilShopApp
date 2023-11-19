@@ -9,6 +9,7 @@ import '../utils/helper/size.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hintText;
+  final String ?labelText;
   final Widget? prefixIconData;
   final IconData? suffixIconData;
   bool isPassword;
@@ -24,6 +25,7 @@ class CustomTextField extends StatefulWidget {
       {
         Key? key,
         required this.hintText,
+         this.labelText,
         required this.controller,
         required this.keyBoard,
          this.prefixIconData,
@@ -80,7 +82,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                color: secondaryColor,
               fontWeight: FontWeight.w500),
           hintText: Translator.translate(widget.hintText),
-          labelText: Translator.translate(widget.hintText),
+          labelText: widget.labelText??Translator.translate(widget.hintText),
         labelStyle: TextStyle(color: secondaryColor),
         //  prefixIconColor: primaryColor,
 

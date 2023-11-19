@@ -1,19 +1,25 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart'as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mangerapp/utils/ui/common_views.dart';
 import 'package:mangerapp/views/all_items/all_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
+import '../generated/l10n.dart';
 import '../services/app_localization.dart';
 import '../utils/colors.dart';
 import '../utils/fonts.dart';
 import '../utils/helper/navigator.dart';
 import '../utils/helper/size.dart';
 import '../widget/text_feild.dart';
+import 'all_items/all_item_controller.dart';
+import 'items/add_admin_controller.dart';
 
 class AddItem extends StatefulWidget {
   const AddItem({super.key});
@@ -23,6 +29,7 @@ class AddItem extends StatefulWidget {
 }
 
 class _AddItemState extends State<AddItem> {
+
   List<String> errorMessages = [];
   TextEditingController?  nameItemEnglish = TextEditingController();
   TextEditingController?  nameItemArabic = TextEditingController();
@@ -31,7 +38,10 @@ class _AddItemState extends State<AddItem> {
   TextEditingController?  desItemEnglish = TextEditingController();
   TextEditingController?  imageItem = TextEditingController();
   TextEditingController?  id = TextEditingController();
-
+  var subCategoriesActive = [];
+  var walletCategoriesActive = [];
+  var subCategoriesPendung = [];
+  var walletCategoriesPendung = [];
   File? profilePic;
   final imagePicker=ImagePicker();
   Future getImageFromGallery() async {
@@ -56,8 +66,53 @@ class _AddItemState extends State<AddItem> {
       }
     });
   }
+  //------------------------ Get all categories -----------------------------------------//
+  void fetchSubCategories() async {
+    SharedPreferences prefs =
+    await SharedPreferences.getInstance();
+    var bearerToken =prefs.getString('token');
+
+    final response = await http.get(Uri.parse(
+      'https://news.wasiljo.com/public/api/v1/manager/mySubCategories',
+    ),    headers: {'Authorization': 'Bearer $bearerToken'},);
+
+    if (response.statusCode == 200) {
+      print('yes');
+      final jsonData = json.decode(response.body);
+
+      subCategoriesPendung = jsonData['data']['subCategoriesPending'];
+      subCategoriesActive = jsonData['data']['subCategoriesAccepted'];
+      print('subCategoriesPendung');
+      print(subCategoriesPendung.length);
+      print(subCategoriesPendung);
+
+    } else {
+      throw Exception('Failed to load subcategories');
+    }}
+  fetchWalletCategories() async {
+    SharedPreferences prefs =
+    await SharedPreferences.getInstance();
+    var bearerToken =prefs.getString('token');
+
+    final response = await http.get(Uri.parse(
+      'https://news.wasiljo.com/public/api/v1/manager/my-wallets',
+    ),    headers: {'Authorization': 'Bearer $bearerToken'},);
+
+    if (response.statusCode == 200) {
+      print('yes');
+      final jsonData = json.decode(response.body);
+
+      walletCategoriesPendung = jsonData['data']['walletsPending'];
+      walletCategoriesActive  = jsonData['data']['walletsAccepted'];
+      print(walletCategoriesPendung );
+
+    } else {
+      throw Exception('Failed to load subcategories');
+    }}
+
   @override
   Widget build(BuildContext context) {
+    ItemsController controllerItem =Get.put(ItemsController());
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
@@ -73,7 +128,7 @@ class _AddItemState extends State<AddItem> {
                 children: [
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 5.0.w),
-                    child: Text(Translator.translate("Add  New Items"),style: boldPrimary,),
+                    child: Text(Translator.translate(S.of(context).addNewItems),style: boldPrimary,),
                   ),
                 ],
               ),
@@ -124,17 +179,17 @@ class _AddItemState extends State<AddItem> {
               CustomTextField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your item Name Arabic';
+                    return S.of(context).pleaseEnterYourItemNameArabic;
                   }
                   if (!RegExp(r'^[؀-ۿ\s]+$').hasMatch(value)) {
-                    return 'Please enter only character Arabic';
+                    return S.of(context).pleaseEnterOnlyCharacterArabic;
                   }
                   return null;
                 },
                 keyBoard: TextInputType.text,
                 controller: nameItemArabic! ,
 
-                hintText: Translator.translate("Name Item Arabic"),
+                hintText: Translator.translate(S.of(context).nameItemArabic),
 
                 onPrefixIconPress: () {
                   setState(() {
@@ -143,33 +198,33 @@ class _AddItemState extends State<AddItem> {
                 }, prefixIconData: null,
 
               ),
-              CustomTextField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your item Name English';
-                  }
-                  if (!RegExp(r'^[a-zA-Z0-9 ]*$').hasMatch(value)) {
-                    return 'please only character in English';
-                  }
-                  return null;
-                },
-                keyBoard: TextInputType.text,
-                controller: nameItemEnglish! ,
-
-                hintText: Translator.translate("Name Item in English"),
-
-                onPrefixIconPress: () {
-                  setState(() {
-
-                  });
-                }, prefixIconData: null,
-
-              ),
+              // CustomTextField(
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter your item Name English';
+              //     }
+              //     if (!RegExp(r'^[a-zA-Z0-9 ]*$').hasMatch(value)) {
+              //       return 'please only character in English';
+              //     }
+              //     return null;
+              //   },
+              //   keyBoard: TextInputType.text,
+              //   controller: nameItemEnglish! ,
+              //
+              //   hintText: Translator.translate("Name Item in English"),
+              //
+              //   onPrefixIconPress: () {
+              //     setState(() {
+              //
+              //     });
+              //   }, prefixIconData: null,
+              //
+              // ),
               CustomTextField(
                 keyBoard: TextInputType.text,
                 controller: priceItem! ,
 
-                hintText: Translator.translate("Price Item"),
+                hintText: Translator.translate(S.of(context).priceItem),
 
                 onPrefixIconPress: () {
                   setState(() {
@@ -181,7 +236,7 @@ class _AddItemState extends State<AddItem> {
               CustomTextField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your Description Name Arabic';
+                    return S.of(context).pleaseEnterYourDescriptionNameArabic;
                   }
                   if (!RegExp(r'^[؀-ۿ\s]+$').hasMatch(value)) {
                     return 'Please enter only character  Arabic';
@@ -191,7 +246,7 @@ class _AddItemState extends State<AddItem> {
                 keyBoard: TextInputType.text,
                 controller: desItemArabic! ,
 
-                hintText: Translator.translate("Description Item in Arabic"),
+                hintText: Translator.translate(S.of(context).descriptionItemInArabic),
 
                 onPrefixIconPress: () {
                   setState(() {
@@ -200,28 +255,28 @@ class _AddItemState extends State<AddItem> {
                 }, prefixIconData: null,
 
               ),
-              CustomTextField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your manger Name English';
-                  }
-                  if (!RegExp(r'^[a-zA-Z0-9 ]*$').hasMatch(value)) {
-                    return 'please only character in English';
-                  }
-                  return null;
-                },
-                keyBoard: TextInputType.text,
-                controller: desItemEnglish! ,
-
-                hintText: Translator.translate("Description Item in English"),
-
-                onPrefixIconPress: () {
-                  setState(() {
-
-                  });
-                }, prefixIconData: null,
-
-              ),
+              // CustomTextField(
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter your manger Name English';
+              //     }
+              //     if (!RegExp(r'^[a-zA-Z0-9 ]*$').hasMatch(value)) {
+              //       return 'please only character in English';
+              //     }
+              //     return null;
+              //   },
+              //   keyBoard: TextInputType.text,
+              //   controller: desItemEnglish! ,
+              //
+              //   hintText: Translator.translate("Description Item in English"),
+              //
+              //   onPrefixIconPress: () {
+              //     setState(() {
+              //
+              //     });
+              //   }, prefixIconData: null,
+              //
+              // ),
               // profilePic !=null ? Container(
               //     margin: Spacing.fromLTRB(24, 16, 24, 0),
               //     child: Image.file(profilePic!)
@@ -247,7 +302,7 @@ class _AddItemState extends State<AddItem> {
                             ),),
 
                           //labelText:profilePic!=null ?  profilePic!.path.split('/').last :Translator.translate("Logo")  ,
-                          hintText: profilePic!=null ?  profilePic!.path.split('/').last :Translator.translate("Logo")  ,
+                          hintText: profilePic!=null ?  profilePic!.path.split('/').last :Translator.translate(S.of(context).logo)  ,
                           border:const OutlineInputBorder(
 
 
@@ -293,7 +348,7 @@ class _AddItemState extends State<AddItem> {
               ),
    const SizedBox(height: 20,),
 
-   CommonViews().createButton(title: 'Save',    onPressed: () async {
+   CommonViews().createButton(title: 'Add Item',    onPressed: () async {
        print('not');
        if (formKey.currentState!.validate()) {
            print('not');
@@ -360,7 +415,9 @@ class _AddItemState extends State<AddItem> {
                print("Registration successful!");
                print("Response data: ${response.data}");
 
-
+fetchSubCategories();
+fetchWalletCategories();
+controllerItem.fetchSubCategories();
 
 
                MangerNavigator.of(context).pushReplacement(const AllItems());

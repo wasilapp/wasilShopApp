@@ -7,6 +7,7 @@ import '../../../l10n/app_language.dart';
 import '../../../views/assign_to_driver/all_driver.dart';
 import '../../../views/home_screen/order_controller.dart';
 import '../../../views/home_screen/order_model.dart';
+import '../../../views/order/detail_order.dart';
 
 class OrderWidget extends StatelessWidget {
   final Orders order;
@@ -53,13 +54,13 @@ class OrderWidget extends StatelessWidget {
                SizedBox(height: 1.h,),
 
               Text(
-         'totalprice'+' :${order.total.toString()} JD',
+         S.of(context).totalprice.tr+' :${order.total.toString()} JD',
                 style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0),
               ),            const SizedBox(height: 10,),
               Text(
-                ' Order Date :${order.orderTime!.orderDate.toString() }',
+                S.of(context).orderDate.tr+'${order.orderTime!.orderDate.toString() }',
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Colors.grey.shade400,
@@ -68,7 +69,7 @@ class OrderWidget extends StatelessWidget {
               ),
               const SizedBox(height: 10,),
               Text(
-                ' Order Time${order.orderTime!.orderTimeFrom}-${order.orderTime!.orderTimeTo}',
+                S.of(context).orderTime.tr+'${order.orderTime!.orderTimeFrom}-${order.orderTime!.orderTimeTo}',
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Colors.grey.shade400,
@@ -84,7 +85,9 @@ class OrderWidget extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           controllerOrder.statusOrder(id: order.id.toString(), status:'accepted');
-                          Get.off(const homepage());
+                          // Get.off(const homepage());
+                          controllerOrder.getProducts();
+
 
                         },
                         child:SizedBox(
@@ -96,7 +99,7 @@ class OrderWidget extends StatelessWidget {
 
 
                               // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.grey.withOpacity(0.2)),
-                              child: Center(child: Text('accept',style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.green),))),
+                              child: Center(child: Text('accept'.tr,style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.green),))),
                         ) ,
                       ),
                       const SizedBox(width: 20,),
@@ -114,7 +117,7 @@ class OrderWidget extends StatelessWidget {
                               _refresh();
                               // Get.off(HomePage());
                             },
-                            child:Center(child: Text(Translator.translate("Decline"),style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.red),)) ,
+                            child:Center(child: Text(Translator.translate("Decline".tr),style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.red),)) ,
                           ),
                         ),
                       ),
@@ -128,14 +131,16 @@ class OrderWidget extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           Get.to(const AllDriver(),arguments: {'orderId':order.id.toString()})    ;     _refresh();         },
-                        child:Center(child: Text('assignToDriver',style: const TextStyle(fontWeight: FontWeight.bold,color: primaryColor),)) ,
+                        child:Center(child: Text('assignToDriver'.tr,style: const TextStyle(fontWeight: FontWeight.bold,color: primaryColor),)) ,
                       ),
                     ),
                   ):const Text(''),
                   const Spacer(),
                   InkWell(
-
-                    child:Text(Translator.translate("view detail"),style: const TextStyle(fontWeight: FontWeight.normal,color: Colors.black),) ,
+onTap: () {
+ Get.to(OrderDetail(model: order,));
+},
+                    child:Text(Translator.translate("view detail".tr),style: const TextStyle(fontWeight: FontWeight.normal,color: Colors.black),) ,
                   ),
                 ],)
             ],

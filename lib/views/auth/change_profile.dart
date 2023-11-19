@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart'as http;
-import '../config/custom_package.dart';
+import '../../config/custom_package.dart';
 
 class ChangeProfile extends StatefulWidget {
   const ChangeProfile({super.key});
@@ -248,66 +248,73 @@ class _ChangeProfileState extends State<ChangeProfile> {
       print('Error: $error');
     }
   }
-  updateStatus()async{
-    log("statrr");
+  updateStatus(status)async{
     SharedPreferences prefs= await SharedPreferences.getInstance();
     var bearerToken=   prefs.getString('token');
-    try{
-      var response=await http.post(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'),
-        body: {
-          'shop[category_id]':'2',
-        },
-
-        headers: {'Authorization': 'Bearer $bearerToken'},
-      );
-      if(response.statusCode==200){
-        print(response.body);
-        log("done update status");
-        setState(() {
-
-        });
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $bearerToken'
+    };
+    var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'));
+    request.body = json.encode({
+      "manager": {
+        "name": {
+          "en": mangerNameEnglish!.text,
+          "ar": mangerNameArabic!.text
+        }
+      },
+      "shop": {
+        // "open": 1,
+        "distance":distance!.text
       }
-      else{
-        print(response.body);
-      }
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
     }
-    catch(e){
-      print(e);
+    else {
+      print(response.reasonPhrase);
     }
+
   }
-    updateProfile()async{
-      log("statrr");
+
+
+  updateProfile()async{
       SharedPreferences prefs= await SharedPreferences.getInstance();
       var bearerToken=   prefs.getString('token');
-      print(mangerNameEnglish.text);
-      try{
-        var response=await http.post(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'),
-          body: {
-        'shop[distance]':distance.text,
-        'manager[name][en]':mangerNameEnglish.text,
-        'manager[name][ar]':mangerNameArabic.text,
-
-          },
-
-          headers: {'Authorization': 'Bearer $bearerToken'},
-        );
-        if(response.statusCode==200){
-          print(response.body);
-          log("done update status");
-          Get.snackbar('done hidden', '',
-              backgroundColor:primaryColor, snackPosition: SnackPosition.BOTTOM,
-              icon: const Icon(Icons.done_outline_rounded));
-          setState(() {
-
-          });
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $bearerToken'
+      };
+      var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'));
+      request.body = json.encode({
+        // "manager": {
+        //   "name": {
+        //     "en": mangerNameEnglish!.text,
+        //     "ar": mangerNameArabic!.text
+        //   }
+        // },
+        "shop": {
+           "open": 1,
+          //"distance":distance!.text
         }
-        else{
-          print(response.body);
-        }
+      });
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        print(await response.stream.bytesToString());
+
       }
-      catch(e){
-        print(e);
+      else {
+        print(response.reasonPhrase);
       }
+
     }
 
 
@@ -407,7 +414,7 @@ const SizedBox(height: 30,),
   ),
   const SizedBox(height: 20,),
   CommonViews().createButton(title: 'Update profile', onPressed: () {
-    updateStatus();
+    updateProfile();
   },)
 ]),
     ));

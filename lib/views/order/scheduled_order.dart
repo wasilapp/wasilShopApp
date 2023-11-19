@@ -19,8 +19,8 @@ class _ScheduledOrderState extends State<ScheduledOrder> {
 
   OrderController controllerOrder = Get.put(OrderController());
   List listToSearch=[
-    'All', 'pending','accepted_by_shop','assign_shop_to_delivery','accepted_by_driver',
-    'on_the_way', 'delivered','rejected_by_shop','rejected_by_driver','cancelled_by_user','cancelled_by_shop',
+    'All'.tr, 'pending'.tr,'accepted_by_shop'.tr,'assign_shop_to_delivery'.tr,'accepted_by_driver'.tr,
+    'on_the_way'.tr, 'delivered'.tr,'rejected_by_shop'.tr,'rejected_by_driver'.tr,'cancelled_by_user'.tr,'cancelled_by_shop'.tr,
   ];
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _ScheduledOrderState extends State<ScheduledOrder> {
                 menuHeight: 20.h,
                 menuMode: true,
                 items: listToSearch,
-                label: 'selectStatus',
+                label: 'selectStatus'.tr,
                 decoration: BoxDecoration(
                     border: Border.all(
                         color: const Color(0xffeef2fa)

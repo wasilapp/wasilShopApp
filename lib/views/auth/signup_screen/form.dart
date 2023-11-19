@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:sizer/sizer.dart';
 import '../../../config/custom_package.dart';
@@ -30,7 +31,7 @@ class _SignupFormState extends State<SignupForm> {
   TextEditingController address = TextEditingController();
   bool showPassword = false;
   String countryCode = "962";
-  List<String> errorMessages = [];
+  var errorList = [].obs;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   File? profilePic;
   final picker = ImagePicker();
@@ -307,13 +308,13 @@ class _SignupFormState extends State<SignupForm> {
             ],
           ),
           CustomTextField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return S.of(context).pleaseEnterYourEmailNumber;
-              }
-              return null;
-            },
-            keyBoard: TextInputType.text,
+            // validator: (value) {
+            //   if (value == null || value.isEmpty) {
+            //     return S.of(context).pleaseEnterYourEmailNumber;
+            //   }
+            //   return null;
+            // },
+            keyBoard: TextInputType.emailAddress,
             controller: email,
             hintText: Translator.translate(S.of(context).email),
             prefixIconData:const Icon(Icons.email_outlined),
@@ -321,24 +322,24 @@ class _SignupFormState extends State<SignupForm> {
               setState(() {});
             },
           ),
-          CustomTextField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return S.of(context).pleaseEnterYourShopNameEnglish;
-              }
-              // if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-              //   return S.of(context).pleaseOnlyCharacterInEnglish;
-              // }
-              return null;
-            },
-            keyBoard: TextInputType.text,
-            controller: shopNameEnglish,
-            hintText: Translator.translate(S.of(context).shopNameInEnglish),
-            prefixIconData:const Icon(Icons.store_mall_directory_outlined),
-            onPrefixIconPress: () {
-              setState(() {});
-            },
-          ),
+          // CustomTextField(
+          //   validator: (value) {
+          //     if (value == null || value.isEmpty) {
+          //       return S.of(context).pleaseEnterYourShopNameEnglish;
+          //     }
+          //     // if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+          //     //   return S.of(context).pleaseOnlyCharacterInEnglish;
+          //     // }
+          //     return null;
+          //   },
+          //   keyBoard: TextInputType.text,
+          //   controller: shopNameEnglish,
+          //   hintText: Translator.translate(S.of(context).shopNameInEnglish),
+          //   prefixIconData:const Icon(Icons.store_mall_directory_outlined),
+          //   onPrefixIconPress: () {
+          //     setState(() {});
+          //   },
+          // ),
           CustomTextField(
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -357,24 +358,24 @@ class _SignupFormState extends State<SignupForm> {
               setState(() {});
             },
           ),
-          CustomTextField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return S.of(context).pleaseEnterYourMangerNameEnglish;
-              }
-              if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                return S.of(context).pleaseOnlyCharacterInEnglish;
-              }
-              return null;
-            },
-            keyBoard: TextInputType.text,
-            controller: mangerNameEnglish,
-            hintText: Translator.translate(S.of(context).mangerNameInEnglish),
-            prefixIconData:const Icon(Icons.perm_identity),
-            onPrefixIconPress: () {
-              setState(() {});
-            },
-          ),
+          // CustomTextField(
+          //   validator: (value) {
+          //     if (value == null || value.isEmpty) {
+          //       return S.of(context).pleaseEnterYourMangerNameEnglish;
+          //     }
+          //     if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+          //       return S.of(context).pleaseOnlyCharacterInEnglish;
+          //     }
+          //     return null;
+          //   },
+          //   keyBoard: TextInputType.text,
+          //   controller: mangerNameEnglish,
+          //   hintText: Translator.translate(S.of(context).mangerNameInEnglish),
+          //   prefixIconData:const Icon(Icons.perm_identity),
+          //   onPrefixIconPress: () {
+          //     setState(() {});
+          //   },
+          // ),
           CustomTextField(
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -395,6 +396,7 @@ class _SignupFormState extends State<SignupForm> {
           ),
 
           CustomTextField(
+            labelText: S.of(context).selectLocationStore,
             validator: (value) {
               if (SearchLocationScreen.address == null) {
                 return S.of(context).pleaseEnterYourAddress;
@@ -402,8 +404,9 @@ class _SignupFormState extends State<SignupForm> {
               return null;
             },
             readOnly: true,
-            press: () =>
-                MangerNavigator.of(context).push(const SearchLocationScreen()),
+            press: () {  MangerNavigator.of(context).push(const SearchLocationScreen());
+              log(SearchLocationScreen.address);},
+
             keyBoard: TextInputType.text,
             controller: address,
             prefixIconData:const Icon (Icons.location_on_outlined),
@@ -411,7 +414,7 @@ class _SignupFormState extends State<SignupForm> {
             hintText:SearchLocationScreen.address != null ?  SearchLocationScreen.address:'select address'.tr,),
 
 
-          CustomTextField(
+          CustomTextField(labelText:Translator.translate(S.of(context).profilepic),
             validator: (value) {
               if (profilePic == null) {
                 return S.of(context).pleaseEnterYourProfilepic;
@@ -448,7 +451,7 @@ class _SignupFormState extends State<SignupForm> {
             },
             keyBoard: TextInputType.text,
               prefixIconData:const Icon( Icons.image_outlined),
-
+labelText:Translator.translate(S.of(context).licencepic),
               controller: licence,
             hintText: licencePic != null
                 ? licencePic!.path.split('/').last
@@ -484,7 +487,7 @@ prefixIconData: const Icon(Icons.lock_outline),
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignupScreen()));
+                          builder: (context) => const LoginScreen()));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -498,11 +501,15 @@ prefixIconData: const Icon(Icons.lock_outline),
                     Text(
                       Translator.translate(S.of(context).signin),
                       style: basicPrimary,
-                    )
+                    ),
+
                   ],
                 ),
               ),
             ),
+          ),
+           SizedBox(
+            height: 1.h,
           ),
         ],
       ),
@@ -520,19 +527,20 @@ Widget buildButton(){
         String? fcmToken = await pushNotificationsManager.getToken();
 
 
-        log("device token is : ${fcmToken.toString()}");
+
         if (formKey.currentState!.validate()) {
+          log("device token is : ${fcmToken.toString()}");
           final dio = Dio(); // Create a Dio instance
           final formData = FormData();
           const url =
-              "https://news.wasiljo.com/public/api/v1/manager/register";
+              "https://news.wasiljo.com/public/api/v1/manager/register?lang=ar";
           final headers = {
             "Accept": "application/json",
             "Content-Type": "application/json",
           };
           // Define the request data (payload)
           formData.fields.addAll([
-            MapEntry('shop[name][en]', shopNameEnglish.text),
+            MapEntry('shop[name][en]', shopNameArabic.text),
             MapEntry('shop[name][ar]', shopNameArabic.text),
             MapEntry(
                 'latitude', SearchLocationScreen.latitude.toString()),    MapEntry(
@@ -542,7 +550,7 @@ Widget buildButton(){
             MapEntry(
                 'longitude', SearchLocationScreen.longitude.toString()),
             MapEntry('manager[name][ar]', mangerNameArabic.text),
-            MapEntry('manager[name][en]', mangerNameEnglish.text),
+            MapEntry('manager[name][en]', mangerNameArabic.text),
             MapEntry('password', password.text),
             MapEntry('mobile', countryCode.toString() + mobile.text),
             MapEntry('email', email.text),
@@ -589,7 +597,7 @@ Widget buildButton(){
               String token = data['token'].toString();
               await sharedPreferences.setString('token', token);
               setState(() {
-                errorMessages.clear();
+                errorList.clear();
               });
               log("Response data: ${response.data}");
 
@@ -611,8 +619,9 @@ Widget buildButton(){
                   log("Error during registration: ${responseData['message']}");
                 } else {
                   setState(() {
-                    errorMessages =
-                    List<String>.from(responseData['error']+responseData.toString());
+                    errorList.value = List<String>.from(responseData['error']);
+                    // errorMessages =
+                    // List<String>.from(responseData['error']+responseData.toString());
                   });
                   log("An error occurred: ${responseData['error']}");
                 }
@@ -664,12 +673,13 @@ Widget buildButton(){
   // },
 
   Container buildErrorWidget() {
-    return Container(
+    return
+     Container(
       margin: const EdgeInsets.only(left: 20, top: 5),
-      height: 90,
-      child: errorMessages.isNotEmpty
-          ? ListView.builder(
-              itemCount: errorMessages.length,
+
+      child: errorList.isNotEmpty
+          ? ListView.builder(shrinkWrap: true,
+              itemCount: errorList.length,
               itemBuilder: (context, index) {
                 return Row(
                   children: [
@@ -681,7 +691,7 @@ Widget buildButton(){
                       width: 5,
                     ),
                     Text(
-                      errorMessages[index],
+                      errorList[index],
                       style: const TextStyle(
                         color: Colors.red,
                       ),

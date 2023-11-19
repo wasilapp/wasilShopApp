@@ -10,7 +10,7 @@ import '../../config/custom_package.dart';
 import '../../generated/l10n.dart';
 import '../all_items/all_item_model.dart';
 import '../all_items/all_items.dart';
-import 'add.dart';
+
 
 class AddNewWallet extends StatefulWidget {
   const AddNewWallet({super.key});
@@ -69,7 +69,7 @@ class _AddNewWalletState extends State<AddNewWallet> {
   }
   SubCategoriesAccepted? selectedCategory;
   SubCategoryController controller=Get.put(SubCategoryController());
-  AddWalletController addWallet=Get.put(AddWalletController());
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
 
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 5.w),
+                      padding:  EdgeInsets.symmetric(horizontal: 2.w),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: primaryColor,
@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //   ),
                 // ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 2.0.w),
+                  padding:  EdgeInsets.symmetric(horizontal: 2.0.w,vertical: 2.h),
                   child: Obx(() =>    Text(
                     controllerSignIn.errorText.value,
                     style: const TextStyle(
@@ -214,6 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     child: InkWell(
                       onTap: () {
+                        controllerSignIn.errorText.value='';
                         Navigator.push(
                             context,
                             MaterialPageRoute(

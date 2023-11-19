@@ -717,7 +717,7 @@ class Carts {
   int? subCategoriesId;
   int? quantity;
   int? price;
-  int? total;
+  dynamic? total;
   String? createdAt;
   String? updatedAt;
 

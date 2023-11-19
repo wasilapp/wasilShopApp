@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:mangerapp/utils/helper/navigator.dart';
 import 'package:mangerapp/utils/ui/common_views.dart';
 import 'package:mangerapp/views/auth/signin_screen/login_screen.dart';
-import 'package:mangerapp/views/change_profile.dart';
+import 'package:mangerapp/views/auth/change_profile.dart';
 import 'package:mangerapp/views/show_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../generated/l10n.dart';
-import '../utils/colors.dart';
+import '../../../generated/l10n.dart';
+import '../../utils/colors.dart';
 import 'dart:convert';
 
 class Profile extends StatefulWidget {
@@ -33,7 +33,40 @@ class _ProfileState extends State<Profile> {
   var onn;
   bool open=false;
   var image;
+  updateStatus(status)async{
+    print("""""$status""");
+    SharedPreferences prefs= await SharedPreferences.getInstance();
+    var bearerToken=   prefs.getString('token');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $bearerToken'
+    };
+    var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'));
+    request.body = json.encode({
+      // "manager": {
+      //   "name": {
+      //     "en": mangerNameEnglish!.text,
+      //     "ar": mangerNameArabic!.text
+      //   }
+      // },
+      "shop": {
+        "open": status,
+        // "distance":distance!.text
+      }
+    });
+    request.headers.addAll(headers);
 
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+
+  }
 get() async {
   print('object');
 
@@ -77,32 +110,8 @@ setState(() {
 
 
 }
-updateStatus()async{
-  log("statrr");
-  SharedPreferences prefs= await SharedPreferences.getInstance();
-  var bearerToken=   prefs.getString('token');
-  try{
-  var response=await http.post(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'),
-  body: {
-    'shop[open]':onn.toString()
-  },
 
-    headers: {'Authorization': 'Bearer $bearerToken'},
-);
-if(response.statusCode==200){
-  log("done update status");
-  setState(() {
 
-  });
-}
-else{
-  print(response.body);
-}
-  }
-      catch(e){
-print(e);
-      }
-}
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -126,14 +135,16 @@ print(e);
                      style: ElevatedButton.styleFrom(backgroundColor: onn==1?primaryColor:Colors.red,
                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)))),
 
-                       onPressed: () {print(onn);
-                         updateStatus();
-                       print(onn);
+                       onPressed: () {
+
+
                          setState(() {
 
                            open=!open;
                            open?onn=1:onn=0;
                            print(onn);
+                           updateStatus(onn);
+
                          });
                    }, child: Text(onn==1?'OnnLine':'offline',style: const TextStyle(color: backgroundColor,fontWeight: FontWeight.bold),))
                  ],
@@ -197,7 +208,7 @@ print(e);
              onTap: () {
                setState(() {
                  onn=0;
-                 updateStatus();
+                 updateStatus(onn);
                });
 MangerNavigator.of(context).pushReplacement(const LoginScreen());
 

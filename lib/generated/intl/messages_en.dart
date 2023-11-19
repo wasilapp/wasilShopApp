@@ -22,20 +22,48 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "active": MessageLookupByLibrary.simpleMessage("فعال"),
+        "addCouponBook":
+            MessageLookupByLibrary.simpleMessage("اضافة دفتر كوبونات"),
+        "addItem": MessageLookupByLibrary.simpleMessage("اضافة منتج"),
+        "addItemFromAdmain":
+            MessageLookupByLibrary.simpleMessage("اضافة منتج مقترح"),
+        "addItemStore":
+            MessageLookupByLibrary.simpleMessage("اضافة مننج خاص بك"),
+        "addNewItems": MessageLookupByLibrary.simpleMessage("انشاء منتج خاص"),
         "arabic": MessageLookupByLibrary.simpleMessage("Transaction"),
+        "assignToDriver": MessageLookupByLibrary.simpleMessage("ممممممممم"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
+        "carnumber": MessageLookupByLibrary.simpleMessage("رقم السيارة"),
         "changelanguage": MessageLookupByLibrary.simpleMessage("Transaction"),
+        "confirmYourLocation":
+            MessageLookupByLibrary.simpleMessage("confirmYourLocation"),
         "contactus": MessageLookupByLibrary.simpleMessage("contact_us"),
         "coupon": MessageLookupByLibrary.simpleMessage("Coupon"),
+        "createNewDriver": MessageLookupByLibrary.simpleMessage("انشاء درايفر"),
+        "delete": MessageLookupByLibrary.simpleMessage("فقط"),
+        "deleteaccount": MessageLookupByLibrary.simpleMessage("deleteaccount"),
+        "deleted": MessageLookupByLibrary.simpleMessage("فقط"),
+        "descriptionItemInArabic":
+            MessageLookupByLibrary.simpleMessage("وصف المنتج بالعربي"),
+        "doneAdditem":
+            MessageLookupByLibrary.simpleMessage("تمت الاضافة بنجاح"),
         "dontHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an Account?"),
         "driver": MessageLookupByLibrary.simpleMessage("Driver"),
+        "driverNameInArabic":
+            MessageLookupByLibrary.simpleMessage("اسم السائق"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "filed": MessageLookupByLibrary.simpleMessage("فقط"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "haveAccount": MessageLookupByLibrary.simpleMessage("Have Account ?"),
+        "hidden": MessageLookupByLibrary.simpleMessage("اخفاء"),
         "items": MessageLookupByLibrary.simpleMessage("Items"),
         "licencepic": MessageLookupByLibrary.simpleMessage("licencePic"),
+        "licencepicDriver":
+            MessageLookupByLibrary.simpleMessage("صورة رخصة السيارة"),
+        "logo": MessageLookupByLibrary.simpleMessage("Logo"),
         "mangerNameInArabic":
             MessageLookupByLibrary.simpleMessage("Manger name in arabic"),
         "mangerNameInEnglish":
@@ -43,19 +71,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "mobileNumber": MessageLookupByLibrary.simpleMessage("mobile Number"),
         "mobileNumberNotEqiual9":
             MessageLookupByLibrary.simpleMessage("mobile number not eqiual 9"),
+        "nameItemArabic": MessageLookupByLibrary.simpleMessage("اسم المنتج"),
         "nearestOrder": MessageLookupByLibrary.simpleMessage("Nearest Order"),
+        "only": MessageLookupByLibrary.simpleMessage("فقط"),
+        "orderDate": MessageLookupByLibrary.simpleMessage("تاريخ الطلب"),
+        "orderTime": MessageLookupByLibrary.simpleMessage("سعر الطلب"),
         "orders": MessageLookupByLibrary.simpleMessage("orders"),
         "password": MessageLookupByLibrary.simpleMessage("password"),
         "passwordLengthAtLeast8Character": MessageLookupByLibrary.simpleMessage(
             "password length at least 8 character"),
+        "pending": MessageLookupByLibrary.simpleMessage("في حالة الانتظار"),
         "pleaseEnterOnlyCharacterArabic": MessageLookupByLibrary.simpleMessage(
             "Please enter only character   Arabic"),
         "pleaseEnterYourAddress":
             MessageLookupByLibrary.simpleMessage("Please enter your address"),
+        "pleaseEnterYourCarnumber":
+            MessageLookupByLibrary.simpleMessage("الرجاء ادحخال رقم السيارة"),
+        "pleaseEnterYourDescriptionNameArabic":
+            MessageLookupByLibrary.simpleMessage(
+                "الرجاء ادخال وصف المنتج بالعربي"),
+        "pleaseEnterYourDriverNameArabic":
+            MessageLookupByLibrary.simpleMessage("اسم السائق بالعربي"),
         "pleaseEnterYourEmailNumber": MessageLookupByLibrary.simpleMessage(
             "Please enter your Email number"),
+        "pleaseEnterYourItemNameArabic": MessageLookupByLibrary.simpleMessage(
+            "الرجاء ادخال اسم المنتج بالعربي"),
         "pleaseEnterYourLicencepic": MessageLookupByLibrary.simpleMessage(
-            "Please enter your licencePic"),
+            "الرجاء اختيار صورة رخصة السيارة"),
         "pleaseEnterYourMangerNameArabic": MessageLookupByLibrary.simpleMessage(
             "Please enter your manger Name Arabic"),
         "pleaseEnterYourMangerNameEnglish":
@@ -75,21 +117,31 @@ class MessageLookup extends MessageLookupByLibrary {
             "please only character in Arabic"),
         "pleaseOnlyCharacterInEnglish": MessageLookupByLibrary.simpleMessage(
             "please only character in English"),
+        "pleaseSelectCategory":
+            MessageLookupByLibrary.simpleMessage("اختيار المنتج"),
+        "priceItem": MessageLookupByLibrary.simpleMessage("سعر المنتج"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "profileDriver": MessageLookupByLibrary.simpleMessage("صورة شخصية"),
         "profilepic": MessageLookupByLibrary.simpleMessage("profile_pic"),
         "scheduledOrder":
             MessageLookupByLibrary.simpleMessage("Scheduled Order"),
+        "searchLocation":
+            MessageLookupByLibrary.simpleMessage("searchLocation"),
+        "selectLocationStore":
+            MessageLookupByLibrary.simpleMessage("selectLocationStore"),
         "share": MessageLookupByLibrary.simpleMessage("share"),
         "shopNameInArabic":
             MessageLookupByLibrary.simpleMessage("Shop name in arabic"),
         "shopNameInEnglish":
             MessageLookupByLibrary.simpleMessage("Shop name in English"),
+        "show": MessageLookupByLibrary.simpleMessage("ظهور"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signin": MessageLookupByLibrary.simpleMessage("SignIn"),
         "signinWithVistor":
             MessageLookupByLibrary.simpleMessage("SignIn with vistor"),
         "signup": MessageLookupByLibrary.simpleMessage("SignUp"),
+        "totalprice": MessageLookupByLibrary.simpleMessage("ساعة الطلب"),
         "transaction": MessageLookupByLibrary.simpleMessage("Transaction")
       };
 }

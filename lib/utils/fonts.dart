@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 import 'colors.dart';
 
@@ -48,6 +49,6 @@ final TextStyle greysmall = GoogleFonts.openSans(
 
 final TextStyle whitebasic = GoogleFonts.openSans(
   color: Colors.white,
-  fontSize: 18.0,
+  fontSize: 11.0.sp,
 );
 

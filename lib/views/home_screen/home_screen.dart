@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,15 +18,16 @@ import '../../utils/fonts.dart';
 import '../../utils/navigator.dart';
 import '../HomeScreen.dart';
 import '../all_items/all_items.dart';
+import '../auth/delete_dialog.dart';
 import '../contact.dart';
 import '../driver/driver.dart';
 import '../order/scheduled_order.dart';
 import '../order/urgent_order.dart';
-import '../profile.dart';
+import '../auth/profile.dart';
 import '../transaction.dart';
 import '../transaction/all_transaction.dart';
 import 'order_controller.dart';
-
+import 'package:http/http.dart'as http;
 
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
@@ -42,7 +45,43 @@ late TabController controller;
 
 
 
+  var onn;
+  bool open=false;
+  var image;
+  updateStatus(status)async{
+    print("""""$status""");
+    SharedPreferences prefs= await SharedPreferences.getInstance();
+    var bearerToken=   prefs.getString('token');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $bearerToken'
+    };
+    var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'));
+    request.body = json.encode({
+      // "manager": {
+      //   "name": {
+      //     "en": mangerNameEnglish!.text,
+      //     "ar": mangerNameArabic!.text
+      //   }
+      // },
+      "shop": {
+        "open": status,
+        // "distance":distance!.text
+      }
+    });
+    request.headers.addAll(headers);
 
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+
+  }
   @override
   void initState() {
     controller = TabController(length: 3, vsync: this);
@@ -52,39 +91,63 @@ late TabController controller;
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-
-      length: 2,
-      child: SafeArea(
+    return
+      // DefaultTabController(
+      //
+      // length: 2,
+    //  child:
+    SafeArea(
         child: Scaffold(
           appBar: AppBar(iconTheme:IconThemeData(color: secondaryColor) ,
 backgroundColor:backgroundColor,
-          bottom:  TabBar(
-            onTap: ( index) {
-              print(index);
-              if(index==0){
-                controllerOrder.type.value='scheduled';
-                print( controllerOrder.type.value);
-              }   if(index==1){
-                controllerOrder.type.value='urgent';
-                print( controllerOrder.type.value);
-              }
-            },
-            labelColor: primaryColor,
-            indicatorColor:primaryColor,
-            dividerColor: primaryColor,
-          tabs:  [
-          Tab(child: Row(children: [
-     const Icon(Icons.store,),
-            Text(S.of(context).scheduledOrder)
-          ],)),
-            Tab(child: Row(children: [
-              const Icon(Icons.local_shipping_outlined,),
-              Text(S.of(context).nearestOrder)
-            ],)),
+          actions: [
+            Container(margin: EdgeInsets.all(5),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: onn==1?primaryColor:Colors.red,
+                  //    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)))
+                  ),
 
-    ],
-    ),),
+                  onPressed: () {
+
+
+                    setState(() {
+
+                      open=!open;
+                      open?onn=1:onn=0;
+                      print(onn);
+                      updateStatus(onn);
+
+                    });
+                  }, child: Text(onn==1?'OnnLine':'offline',style: const TextStyle(color: backgroundColor,fontWeight: FontWeight.bold),)),
+            )
+          ],
+          // bottom:  TabBar(
+          //   onTap: ( index) {
+          //     print(index);
+          //     if(index==0){
+          //       controllerOrder.type.value='scheduled';
+          //       print( controllerOrder.type.value);
+          //     }   if(index==1){
+          //       controllerOrder.type.value='urgent';
+          //       print( controllerOrder.type.value);
+          //     }
+          //   },
+          //   labelColor: primaryColor,
+          //   indicatorColor:primaryColor,
+          //   dividerColor: primaryColor,
+    //       tabs:  [
+    //       Tab(child: Row(children: [
+    //  const Icon(Icons.store,),
+    //         Text(S.of(context).scheduledOrder)
+    //       ],)),
+    //         Tab(child: Row(children: [
+    //           const Icon(Icons.local_shipping_outlined,),
+    //           Text(S.of(context).nearestOrder)
+    //         ],)),
+    //
+    // ],
+   // ),
+        ),
             drawer: Drawer(
                 width: 60.w,
                 backgroundColor:primaryColor,
@@ -102,7 +165,7 @@ backgroundColor:backgroundColor,
                               title: Row(
                                 children: [
                                   const Icon(Icons.home_filled,color:backgroundColor,),
-                                  SizedBox(width: 2.w,),
+
                                   Text(Translator.translate(S.of(context).orders),style: whitebasic,),
                                 ],
                               ),
@@ -117,7 +180,7 @@ backgroundColor:backgroundColor,
                               title: Row(
                                 children: [
                                   const Icon(Icons.person,color:backgroundColor,),
-                                  SizedBox(width: 2.w,),
+                        
                                   Text(Translator.translate(S.of(context).profile),style: whitebasic,),
                                 ],
                               ),
@@ -134,7 +197,7 @@ backgroundColor:backgroundColor,
                               title: Row(
                                 children: [
                                   const Icon(Icons.drive_eta_rounded,color:backgroundColor,),
-                                  SizedBox(width: 2.w,),
+                                  
                                   Text(Translator.translate(S.of(context).driver),style: whitebasic,),
                                 ],
                               ),
@@ -152,7 +215,7 @@ backgroundColor:backgroundColor,
                                 children: [
 
                                   const Icon(Icons.shopping_bag_outlined,color: backgroundColor,),
-                                  SizedBox(width: 2.w,),
+                                  
                                   Text(Translator.translate(S.of(context).items),style: whitebasic,),
                                 ],
                               ),
@@ -170,7 +233,7 @@ onTap: () {
                               title: Row(
                                 children: [
                                   const Icon(Icons.monetization_on_outlined,color: backgroundColor,),
-                                   SizedBox(width: 2.w,),
+                                   
                                   Text(Translator.translate(S.of(context).transaction),style: whitebasic,),
                                 ],
                               ),
@@ -185,7 +248,7 @@ onTap: () {
                               title: Row(
                                 children: [
                                   const Icon(Icons.currency_bitcoin,color: backgroundColor,),
-                                   SizedBox(width: 2.w,),
+                                   
                                   Text(Translator.translate(S.of(context).coupon),style: whitebasic,),
                                 ],
                               ),
@@ -211,7 +274,7 @@ onTap: () {
                               title: Row(
                                 children: [
                                   const Icon(Icons.share,color: backgroundColor,),
-                                  SizedBox(width: 2.w,),
+                                  
                                   Text(Translator.translate(S.of(context).share),style: whitebasic,),
                                 ],
                               ),
@@ -224,7 +287,25 @@ onTap: () {
     },
     ),
                                 //Navigator.pop(context);
+                            ListTile(
+                              title: Row(
+                                children: [
+                                  const Icon(Icons.delete,color: Colors.red,),
+                                  const SizedBox(width: 10,),
+                                  Text(Translator.translate(S.of(context).deleteaccount),style: whitebasic,),
+                                ],
+                              ),
+                              onTap: () async {
 
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return    const DeleteUserDialog();
+                                    });
+
+
+                              },
+                            ),
 
                           ],
                         ),
@@ -239,15 +320,17 @@ onTap: () {
                   ],
                 )),
 
-    body: const TabBarView(
-      children: [
+    body:
+    // const TabBarView(
+    //   children: [
           ScheduledOrder(),
-        UrgentOrder(),
+        // UrgentOrder(),
 
-      ],
+      // ],
 
-    )),
-      ));
+   // )
+      ),
+      );
   }
 
 

@@ -1,12 +1,17 @@
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mangerapp/utils/helper/navigator.dart';
 import 'package:mangerapp/utils/ui/common_views.dart';
+import 'package:mangerapp/views/auth/signup_screen/signup_screen.dart';
 import 'package:search_map_place_updated/search_map_place_updated.dart';
+import '../../generated/l10n.dart';
 import '../../utils/helper/shared_pref.dart';
 
 
@@ -164,7 +169,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
 
                     bgColor: Colors.white,
                     iconColor: Colors.black,
-                    placeholder: 'Search Location',
+                    placeholder: S.of(context).searchLocation,
                     placeType: PlaceType.address,
                     hasClearButton: false,
                     textColor: Colors.black,
@@ -188,7 +193,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               )),
           Align(
             alignment: Alignment.bottomCenter,
-            child: CommonViews().createButton(title: 'Confirm Your Location', onPressed: () {
+            child: CommonViews().createButton(title: S.of(context).confirmYourLocation, onPressed: () {
 
 
 
@@ -196,8 +201,10 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               SharedPreferenceHelper().save(key: 'longitude', type: SaveType.stringType, value:SearchLocationScreen.longitude);
               SharedPreferenceHelper().save(key: 'latitude', type: SaveType.stringType, value:SearchLocationScreen.latitude);
 
+              log(SearchLocationScreen.address);
+              MangerNavigator.of(context).pop();
 
-MangerNavigator.of(context).pop();
+//MangerNavigator.of(context).pop();
 
 
 

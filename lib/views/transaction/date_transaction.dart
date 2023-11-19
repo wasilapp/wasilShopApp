@@ -17,6 +17,7 @@ class AddTransaction extends StatefulWidget {
 
 class _AddTransactionState extends State<AddTransaction> {
   TransactionController controller=Get.put(TransactionController());
+
   DriverOneTransaction ? oneDriver;
   DateTime startDate=DateTime.now();
   DateTime endDate=DateTime.now();
@@ -165,28 +166,95 @@ controller.getTransactionId(id:widget.id,startDate:startInput,endDate: endInput 
                 DataColumn(label: Expanded(child: Center(child: Text('total')))),
                 DataColumn(label: Expanded(child: Center(child: Text('Action')))),
               ],
-              rows: controller.deliveryBoy.map((deliveryBoy) {
-                return DataRow(
+              rows: [ DataRow(
                   cells: [
                     DataCell(Center(child: Text(startInput))),
                     DataCell(Center(child: Text(endInput))),
-                    DataCell(Center(child: Text('${TransactionController.oneDriver.ordersTotal.toString()}'+'JOD'))),
+                    DataCell(Center(child:Obx(() =>  Text('${controller.total.value}'+'JOD')))),
                     DataCell(
 
                         Center(
                           child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
-                            child: Text('add'),onPressed: () {
-                              Get.to(AddTransaction(id: deliveryBoy.id,));
-                            },),
+                              child: Text('add'),onPressed: () async {
+                                SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                                // Define the request headers
+                                var bearerToken = prefs.getString('token');
+                                var headers = {
+                                  'Content-Type': 'application/json',
+                                  'Authorization': 'Bearer $bearerToken'
+                                };
+                                var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/paid_orders/${widget.id}'));
+                                request.body = json.encode({
+                                  "total": controller.total.value,
+                                  "from_date": startInput,
+                                  "to_date": endInput,
+                                  "time": "",
+                                  "orders": controller.orderIds
+                                });
+                                request.headers.addAll(headers);
+
+                                http.StreamedResponse response = await request.send();
+
+                                if (response.statusCode == 200) {
+                                  print(await response.stream.bytesToString());print('done');
+                                }
+                                else {
+                                  print(response.reasonPhrase);
+                                }
+
+                              }),
                         )),
 
                   ],
-                );
-              }).toList(),
+                )]
+
             ),
        ],
      ):Text(''),
+          Spacer(),
 
+          Obx(
+                () {return
+              // if (controller.isWaiting) {
+              // return Center(
+              // child: CircularProgressIndicator(),
+              // );
+              // } else if (controller.isError) {
+              // return Center(
+              // child: Text('Error: }'),
+              // );
+              // } else if (controller.isSuccess) {
+              // return
+              DataTable(columnSpacing: 0,border: TableBorder(horizontalInside: BorderSide(color: Colors.black)),
+                columns: [
+                  DataColumn(label: Expanded(child: Center(child: Text('Id')))),
+                  DataColumn(label: Expanded(child: Center(child: Text('start date')))),
+                  DataColumn(label: Expanded(child: Center(child: Text('end Date')))),
+                  DataColumn(label: Expanded(child: Center(child: Text('total')))),
+
+                ],
+                rows: controller.transaction.map((transaction) {
+                  return DataRow(
+                    cells: [
+                      DataCell(Center(child: Text(transaction.deliveryBoyId.toString()))),
+                      DataCell(Center(child: Text('${transaction.fromDate.toString()}'))),
+                      DataCell(Center(child: Text('${transaction.toDate.toString()}'))),
+                      DataCell(Center(child: Text('${transaction.total.toString()}'))),
+
+
+
+
+                    ],
+                  );
+                }).toList(),
+              );
+              // } else {
+              // return Container();
+              // }
+            },
+          ),
+          SizedBox(height: 10,),
         ],
       ),
     ));
@@ -215,8 +283,12 @@ controller.getTransactionId(id:widget.id,startDate:startInput,endDate: endInput 
       var result=json.decode(response.body)['data']['deliveryBoy'];
       if (json.decode(response.body)['data']['deliveryBoy'].isEmpty) {
         print('response.isEmpty  id${json.decode(response.body)['data']['deliveryBoy']}');
+        List<dynamic> orders = result['orders'];
 
-
+        // Create a list containing order IDs
+        List<int> orderIds = orders.map<int>((order) => order['id']).toList();
+        print(orderIds);
+print("***********************");
         return;
       }
       else {
@@ -263,21 +335,28 @@ controller.getTransactionId(id:widget.id,startDate:startInput,endDate: endInput 
 //     statusModel.value.updateStatus(GeneralStatus.error);
 //     statusModel.value.updateError(response.body);
   }
-  void paidDriver({id,startDate,endDate}) async {
-    log('$id$startDate$endDate');
-
+  void paidDriver({id,startDate,endDate, required  total}) async {
     SharedPreferences prefs =
     await SharedPreferences.getInstance();
     // Define the request headers
     var bearerToken=prefs.getString('token');
+    log('$id$startDate$endDate');
+    log('fffffff');
+
+
     var headers = {
       'Authorization': 'Bearer $bearerToken'
-    };  var body = {
-      'startDate':startDate,
-      'endDate': endDate
     };
-    var response =await http.post( Uri.parse('https://news.wasiljo.com/public/api/v1/manager/paid_orders/$id',
-    ) ,headers:headers);
+    
+    var response =await http.post(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/paid_orders/$id',
+    ) ,headers:headers,
+    body: json.encode({
+      "total": total,
+      "from_date": startDate,
+      "to_date": endDate,
+      "time": "",
+      "orders":controller.orderIds
+    }));
 
 
 
@@ -285,6 +364,7 @@ controller.getTransactionId(id:widget.id,startDate:startInput,endDate: endInput 
     if (response.statusCode == 200) {
       print(json.decode(response.body)['data']['deliveryBoy']);
       var result=json.decode(response.body)['data']['deliveryBoy'];
+      print(response.body);
       if (json.decode(response.body)['data']['deliveryBoy'].isEmpty) {
         print('response.isEmpty  id${json.decode(response.body)['data']['deliveryBoy']}');
 
@@ -294,9 +374,7 @@ controller.getTransactionId(id:widget.id,startDate:startInput,endDate: endInput 
       else {
 
         setState(() {
-          oneDriver = DriverOneTransaction.fromJson(result);
-
-          print(oneDriver);
+        print(response.body);
         });
 
       }

@@ -173,7 +173,7 @@ print(response.body);
   var masseage = data['message'];
 
 print(masseage);
-
+getProducts();
         Get.off(const homepage());
         Get.snackbar(status, '$masseage',
             backgroundColor:primaryColor, snackPosition: SnackPosition.BOTTOM,
@@ -185,6 +185,7 @@ print(masseage);
         Map<String, dynamic> data = json.decode(response.body);
         log('error${data["error"]}');
         var errors = data['error'];
+        getProducts();
         Get.off(const homepage());
         Get.snackbar(status, '$errors',
             backgroundColor:Colors.redAccent, snackPosition: SnackPosition.BOTTOM,

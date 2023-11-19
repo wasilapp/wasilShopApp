@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mangerapp/views/driver/driver.dart';
 import '../../../config/custom_package.dart';
+import '../../generated/l10n.dart';
 import '../../services/push_notification.dart';
 
 
@@ -262,7 +263,7 @@ class _AddDriverState extends State<AddDriver> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Text(
-                        Translator.translate("Create New Driver"),
+                        Translator.translate(S.of(context).createNewDriver),
                         style: boldPrimary,
                       ),
                     ),
@@ -326,14 +327,14 @@ class _AddDriverState extends State<AddDriver> {
                         child: CustomTextField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your mobile number';
+                              return S.of(context).pleaseEnterYourMobileNumber;
                             }
                             if (value.length != 9) {
-                              return 'mobile number not eqiual 9 ';
+                              return S.of(context).mobileNumberNotEqiual9;
                             }
                             return null;
                           },
-                          hintText: 'mobile Number',
+                          hintText: S.of(context).mobileNumber,
                           controller: mobile,
                           prefixIconData: const Icon(Icons.phone_android),
                           keyBoard: TextInputType.number,
@@ -341,36 +342,36 @@ class _AddDriverState extends State<AddDriver> {
                   ],
                 ),
                 CustomTextField(
-                  keyBoard: TextInputType.text,
+                  keyBoard: TextInputType.emailAddress,
                   controller: emailTFController,
-                  hintText: Translator.translate("Email"),
+                  hintText: Translator.translate(S.of(context).email),
                   prefixIconData:const Icon(Icons.email_outlined),
                   onPrefixIconPress: () {
                     setState(() {});
                   },
                 ),
-                CustomTextField(
-                  validator: (value) {
-                    if (driverNameEnglish == null) {
-                      return 'Please enter your  shop Name English';
-                    }
-                    if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value!)) {
-                      return 'please only character in English';
-                    }
-                    return null;
-                  },
-                  keyBoard: TextInputType.text,
-                  controller: driverNameEnglish,
-                  hintText: Translator.translate("driver name in English"),
-                  prefixIconData:const Icon(Icons.perm_identity),
-                  onPrefixIconPress: () {
-                    setState(() {});
-                  },
-                ),
+                // CustomTextField(
+                //   validator: (value) {
+                //     if (driverNameEnglish == null) {
+                //       return 'Please enter your  shop Name English';
+                //     }
+                //     if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value!)) {
+                //       return 'please only character in English';
+                //     }
+                //     return null;
+                //   },
+                //   keyBoard: TextInputType.text,
+                //   controller: driverNameEnglish,
+                //   hintText: Translator.translate("driver name in English"),
+                //   prefixIconData:const Icon(Icons.perm_identity),
+                //   onPrefixIconPress: () {
+                //     setState(() {});
+                //   },
+                // ),
                 CustomTextField(
                   validator: (value) {
                     if (driverNameArabic == null) {
-                      return 'Please enter your driver Name Arabic';
+                      return S.of(context).pleaseEnterYourDriverNameArabic;
                     }
                     if (!RegExp(r'^[؀-ۿ\s]+$').hasMatch(value!)) {
                       return 'الرجاء إدخال حروف عربية فقط';
@@ -379,7 +380,7 @@ class _AddDriverState extends State<AddDriver> {
                   },
                   keyBoard: TextInputType.text,
                   controller: driverNameArabic,
-                  hintText: Translator.translate("driver name in arabic"),
+                  hintText: Translator.translate(S.of(context).driverNameInArabic),
                   prefixIconData: const Icon(Icons.perm_identity),
 
                   onPrefixIconPress: () {
@@ -390,13 +391,13 @@ class _AddDriverState extends State<AddDriver> {
                 CustomTextField(
                   validator: (value) {
                     if (carNumber == null) {
-                      return 'Please enter your carNumber';
+                      return S.of(context).pleaseEnterYourCarnumber;
                     }
                     return null;
                   },
                   keyBoard: TextInputType.text,
                   controller: carNumber,
-                  hintText: Translator.translate("carNumber"),
+                  hintText: Translator.translate(S.of(context).carnumber),
                   prefixIconData:const Icon(Icons.onetwothree_outlined),
                   onPrefixIconPress: () {
                     setState(() {});
@@ -406,7 +407,7 @@ class _AddDriverState extends State<AddDriver> {
                 CustomTextField(
                   validator: (value) {
                     if (profilePic == null) {
-                      return 'Please enter your licencePic';
+                      return S.of(context).pleaseEnterYourLicencepic;
                     }
                     return null;
                   },
@@ -418,7 +419,7 @@ class _AddDriverState extends State<AddDriver> {
                   controller: profile,
                   hintText: profilePic != null
                       ? profilePic!.path.split('/').last
-                      : Translator.translate("profile "),
+                      : Translator.translate(S.of(context).profileDriver),
                   prefixIconData: const Icon(Icons.photo_library_outlined),
                   onPrefixIconPress: () {
                     setState(() {});
@@ -427,7 +428,7 @@ class _AddDriverState extends State<AddDriver> {
                 CustomTextField(
                   validator: (value) {
                     if (profilePic == null) {
-                      return 'Please enter your licencePic';
+                      return S.of(context).pleaseEnterYourLicencepic;
                     }
                     return null;
                   },
@@ -439,7 +440,7 @@ class _AddDriverState extends State<AddDriver> {
                   controller: licence,
                   hintText: licencePic != null
                       ? licencePic!.path.split('/').last
-                      : Translator.translate("licencePic"),
+                      : Translator.translate(S.of(context).licencepicDriver),
                   prefixIconData: const Icon(Icons.photo_library_outlined),
                   onPrefixIconPress: () {
                     setState(() {});
@@ -449,17 +450,17 @@ class _AddDriverState extends State<AddDriver> {
 
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your  password';
+                      return S.of(context).pleaseEnterYourPassword;
                     }
                     if (value.length <= 8) {
-                      return 'password length at least 8 character';
+                      return S.of(context).passwordLengthAtLeast8Character;
                     }
                     return null;
                   },
                   keyBoard: TextInputType.text,
                   controller: passwordTFController,
                   isPassword: showPassword,
-                  hintText: Translator.translate("password"),
+                  hintText: Translator.translate(S.of(context).password),
                   prefixIconData: const Icon( Icons.lock_outline),
                   onPrefixIconPress: () {
                     setState(() {
@@ -493,7 +494,7 @@ class _AddDriverState extends State<AddDriver> {
                 ),
 
                 CommonViews().createButton(
-                    title: 'Create New Driver',
+                    title: S.of(context).createNewDriver,
                     onPressed: () async {
                       PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
                       await pushNotificationsManager.init();
@@ -509,7 +510,7 @@ class _AddDriverState extends State<AddDriver> {
 
                         // Define the API endpoint URL
                         const url =
-                            "https://news.wasiljo.com/public/api/v1/manager/delivery_boys/create";
+                            "https://news.wasiljo.com/public/api/v1/manager/delivery_boys/create?lang=ar";
 
                         // Define the request headers
                         SharedPreferences prefs= await SharedPreferences.getInstance();
@@ -524,7 +525,7 @@ print('bearerToken');
 
                         // Define the request data (payload)
                         formData.fields.addAll([
-                          MapEntry('name[en]', driverNameEnglish.text),
+                          MapEntry('name[en]', driverNameArabic.text),
                           MapEntry('name[ar]', driverNameArabic.text),
 
 

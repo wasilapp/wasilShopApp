@@ -5,6 +5,7 @@ import 'package:mangerapp/config/custom_package.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../../generated/l10n.dart';
 import '../home_screen/order_controller.dart';
 
 class AllDriver extends StatefulWidget {
@@ -117,7 +118,7 @@ centerTitle: true
                   fit: BoxFit.cover,
                 ),
                 title: Text(
-                  driver['name']['en'],
+                  driver['name']['ar'].toString()??'',
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle:Column(
@@ -130,7 +131,8 @@ centerTitle: true
                             Text(driver['is_offline']==0?'onnline':'offline',style: const TextStyle(color: primaryColor,fontWeight: FontWeight.w400),),
                           ],
                         ),
-                        Text( 'Far from shop	${ driver['distance'].toString()}')
+                        Text( 'Far from shop	${ driver['distance'].toString()}'),
+                        //Text(S.of(context).kkkk)
                       ],
                     ),
 //                         Row(
@@ -183,7 +185,7 @@ centerTitle: true
                       controllerOrder.getProducts();
                       Get.off(const homepage());},
 
-                      child:Center(child: Text(Translator.translate("assign to driver"),style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)) ,
+                      child:Center(child: Text(Translator.translate(S.of(context).assignToDriver),style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)) ,
                     ),
                   ),),
                   ],

@@ -146,14 +146,16 @@ class SubCategoryController extends GetxController {
     var response= await http.get(url,headers: headers);
     if((response.statusCode>=200&& response.statusCode<300)){
       print('satat1');
-      if(response.body.isEmpty){
+      if(json.decode(response.body)['data']['subCategoriesAccepted'].isEmpty){
         print('satat1');
+        print(json.decode(response.body)['data']['subCategoriesAccepted']);
+        print(json.decode(response.body)['data']['subCategoriesAccepted'].isEmpty);
         statusModel.value.updateStatus(GeneralStatus.error);
         statusModel.value.updateError('some thing error');
         return ;
       }
       statusModel.value.updateStatus(GeneralStatus.success);
-      print('satat1');
+      print('satat111');
       List listSubCategory=json.decode(response.body)['data']['subCategoriesAccepted'];
 
       for(int i=0;i<listSubCategory.length;i++){

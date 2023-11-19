@@ -12,6 +12,8 @@ class Transaction extends StatelessWidget {
   @override
   void initState(){
     controller.getProducts();
+    controller.getTransaction();
+    print("***********************");
     print(controller.deliveryBoy);
 
   }
@@ -24,17 +26,17 @@ class Transaction extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child:
     Obx(
-    () {
-    if (controller.isWaiting) {
-    return Center(
-    child: CircularProgressIndicator(),
-    );
-    } else if (controller.isError) {
-    return Center(
-    child: Text('Error: }'),
-    );
-    } else if (controller.isSuccess) {
-    return
+    () {return
+    // if (controller.isWaiting) {
+    // return Center(
+    // child: CircularProgressIndicator(),
+    // );
+    // } else if (controller.isError) {
+    // return Center(
+    // child: Text('Error: }'),
+    // );
+    // } else if (controller.isSuccess) {
+    // return
       DataTable(
     columns: [
     DataColumn(label: Text('ID')),
@@ -59,9 +61,9 @@ class Transaction extends StatelessWidget {
     );
     }).toList(),
     );
-    } else {
-    return Container();
-    }
+    // } else {
+    // return Container();
+    // }
     },
       )
     )));

@@ -22,74 +22,124 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "active": MessageLookupByLibrary.simpleMessage("فعال"),
+        "addCouponBook":
+            MessageLookupByLibrary.simpleMessage("اضافة دفتر كوبونات"),
+        "addItem": MessageLookupByLibrary.simpleMessage("اضافة منتج"),
+        "addItemFromAdmain":
+            MessageLookupByLibrary.simpleMessage("اضافة منتج مقترح"),
+        "addItemStore":
+            MessageLookupByLibrary.simpleMessage("اضافة مننج خاص بك"),
+        "addNewItems": MessageLookupByLibrary.simpleMessage("اضافة منتج"),
         "arabic": MessageLookupByLibrary.simpleMessage("مالية"),
-        "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
+        "assignToDriver": MessageLookupByLibrary.simpleMessage("نسب الى سائق"),
+        "camera": MessageLookupByLibrary.simpleMessage("الكايرا"),
+        "carnumber": MessageLookupByLibrary.simpleMessage("رقم السيارة"),
         "changelanguage": MessageLookupByLibrary.simpleMessage("مالية"),
+        "confirmYourLocation":
+            MessageLookupByLibrary.simpleMessage(" تاكيد موقع المحل"),
         "contactus": MessageLookupByLibrary.simpleMessage("التواصل معنا"),
         "coupon": MessageLookupByLibrary.simpleMessage("الكوبونات"),
+        "createNewDriver": MessageLookupByLibrary.simpleMessage("انشاء درايفر"),
+        "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+        "deleteaccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "deleted": MessageLookupByLibrary.simpleMessage("تم الحذف"),
+        "descriptionItemInArabic":
+            MessageLookupByLibrary.simpleMessage("وصف المنتج بالعربي"),
+        "doneAdditem":
+            MessageLookupByLibrary.simpleMessage("تمت الاضافة بنجاح"),
         "dontHaveAnAccount":
-            MessageLookupByLibrary.simpleMessage("لا يوجد لديك  حساب "),
+            MessageLookupByLibrary.simpleMessage("ليس لديك حساب?"),
         "driver": MessageLookupByLibrary.simpleMessage("السائقين"),
-        "email": MessageLookupByLibrary.simpleMessage("بريد الاكتروني"),
+        "driverNameInArabic":
+            MessageLookupByLibrary.simpleMessage("اسم السائق"),
+        "email": MessageLookupByLibrary.simpleMessage("البريد الاكتروني"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "filed": MessageLookupByLibrary.simpleMessage("فشل"),
         "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
-        "haveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب ?"),
-        "licencepic": MessageLookupByLibrary.simpleMessage("رخصة المتجر"),
+        "haveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب"),
+        "hidden": MessageLookupByLibrary.simpleMessage("اخفاء"),
+        "items": MessageLookupByLibrary.simpleMessage("المنتجات"),
+        "licencepic": MessageLookupByLibrary.simpleMessage("رخصةالمحل"),
+        "licencepicDriver":
+            MessageLookupByLibrary.simpleMessage("صورة رخصة السيارة"),
+        "logo": MessageLookupByLibrary.simpleMessage("شعار المحل"),
         "mangerNameInArabic":
             MessageLookupByLibrary.simpleMessage("اسم المدير بالعربي"),
         "mangerNameInEnglish":
-            MessageLookupByLibrary.simpleMessage("اسم المدير بالانجليزي"),
-        "mobileNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف "),
-        "mobileNumberNotEqiual9":
-            MessageLookupByLibrary.simpleMessage("رقم الهاتف لا يساوي 9 ارقام"),
-        "nearestOrder":
-            MessageLookupByLibrary.simpleMessage("الطلبات المستعجلة"),
+            MessageLookupByLibrary.simpleMessage("Manger name in English"),
+        "mobileNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "mobileNumberNotEqiual9": MessageLookupByLibrary.simpleMessage(
+            "رقم الهاتف يجب ان يساوي 9 ارقام "),
+        "nameItemArabic": MessageLookupByLibrary.simpleMessage("اسم المنتج"),
+        "nearestOrder": MessageLookupByLibrary.simpleMessage("اقرب نقطة"),
+        "only": MessageLookupByLibrary.simpleMessage("فقط"),
+        "orderDate": MessageLookupByLibrary.simpleMessage("تاريخ الطلب"),
+        "orderTime": MessageLookupByLibrary.simpleMessage("وقت الطلب"),
         "orders": MessageLookupByLibrary.simpleMessage("الطلبات"),
-        "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
         "passwordLengthAtLeast8Character": MessageLookupByLibrary.simpleMessage(
-            "عدد احرف الباسورد اقل من 8 احرف "),
-        "pleaseEnterOnlyCharacterArabic":
-            MessageLookupByLibrary.simpleMessage("فقط احرف عربية "),
+            "احرف كلمة المرور اقل من 8 احرف"),
+        "pending": MessageLookupByLibrary.simpleMessage("انتظار"),
+        "pleaseEnterOnlyCharacterArabic": MessageLookupByLibrary.simpleMessage(
+            "Please enter only character  Arabic"),
         "pleaseEnterYourAddress":
             MessageLookupByLibrary.simpleMessage("الرجاء ادخال الموقع"),
-        "pleaseEnterYourEmailNumber": MessageLookupByLibrary.simpleMessage(
-            "الرجاء ادخال البريد الاكتروني "),
-        "pleaseEnterYourLicencepic":
-            MessageLookupByLibrary.simpleMessage("الرجاء ادخال رخصة المتجر"),
+        "pleaseEnterYourCarnumber":
+            MessageLookupByLibrary.simpleMessage("الرجاء ادحخال رقم السيارة"),
+        "pleaseEnterYourDescriptionNameArabic":
+            MessageLookupByLibrary.simpleMessage(
+                "الرجاء ادخال وصف المنتج بالعربي"),
+        "pleaseEnterYourDriverNameArabic":
+            MessageLookupByLibrary.simpleMessage("اسم السائق بالعربي"),
+        "pleaseEnterYourEmailNumber":
+            MessageLookupByLibrary.simpleMessage("رجاء ادخال رقم الهاتف"),
+        "pleaseEnterYourItemNameArabic": MessageLookupByLibrary.simpleMessage(
+            "الرجاء ادخال اسم المنتج بالعربي"),
+        "pleaseEnterYourLicencepic": MessageLookupByLibrary.simpleMessage(
+            "الرجاء اختيار صورة رخصة السيارة"),
         "pleaseEnterYourMangerNameArabic": MessageLookupByLibrary.simpleMessage(
-            "الرجاء ادخال اسم المدير بالعربي"),
+            "الرجاء ادخال اسم الدير بالعربي"),
         "pleaseEnterYourMangerNameEnglish":
             MessageLookupByLibrary.simpleMessage(
-                "اسم المدير بالاحرف الانجليزية"),
+                "Please enter your manger Name English"),
         "pleaseEnterYourMobileNumber":
-            MessageLookupByLibrary.simpleMessage("الرجاء ادخال رقم الهاتف"),
+            MessageLookupByLibrary.simpleMessage("رجاء ادخال رقم الهاتف"),
         "pleaseEnterYourPassword":
             MessageLookupByLibrary.simpleMessage("الرجاء ادخال كلمة المرور"),
         "pleaseEnterYourProfilepic":
-            MessageLookupByLibrary.simpleMessage("ادخال الشعار الخاص  بالمتجر"),
+            MessageLookupByLibrary.simpleMessage("الرجاء ادخال ايقون المتجر"),
         "pleaseEnterYourShopNameArabic": MessageLookupByLibrary.simpleMessage(
             "الرجاء ادخال اسم المتجر بالعربي"),
-        "pleaseEnterYourShopNameEnglish": MessageLookupByLibrary.simpleMessage(
-            "الرجاء ادخال اسم المتجر بلانجليزي"),
+        "pleaseEnterYourShopNameEnglish":
+            MessageLookupByLibrary.simpleMessage("ا"),
         "pleaseOnlyCharacterInArabic":
-            MessageLookupByLibrary.simpleMessage("فقط احرف عربية"),
-        "pleaseOnlyCharacterInEnglish":
-            MessageLookupByLibrary.simpleMessage("فقط احرف انجليزي "),
+            MessageLookupByLibrary.simpleMessage("احرف عربية فقط"),
+        "pleaseOnlyCharacterInEnglish": MessageLookupByLibrary.simpleMessage(
+            "please only character in English"),
+        "pleaseSelectCategory":
+            MessageLookupByLibrary.simpleMessage("اختيار المنتج"),
+        "priceItem": MessageLookupByLibrary.simpleMessage("سعر المنتج"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+        "profileDriver": MessageLookupByLibrary.simpleMessage("صورة شخصية"),
         "profilepic": MessageLookupByLibrary.simpleMessage("شعار المتجر"),
         "scheduledOrder":
             MessageLookupByLibrary.simpleMessage("الطلبات المجدولة"),
-        "share": MessageLookupByLibrary.simpleMessage("المشاركة"),
+        "searchLocation": MessageLookupByLibrary.simpleMessage("البحث عن موقع"),
+        "selectLocationStore":
+            MessageLookupByLibrary.simpleMessage("اختيار موقع المتجر"),
+        "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
         "shopNameInArabic":
-            MessageLookupByLibrary.simpleMessage("اسم المتجر بالعربي"),
+            MessageLookupByLibrary.simpleMessage("اسم المتجر بالعربي "),
         "shopNameInEnglish":
-            MessageLookupByLibrary.simpleMessage("اسم المتجر بالانجليزي"),
+            MessageLookupByLibrary.simpleMessage("Shop name in English"),
+        "show": MessageLookupByLibrary.simpleMessage("ظهور"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
-        "signUp": MessageLookupByLibrary.simpleMessage("انشاء حساب "),
-        "signin": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
-        "signinWithVistor":
-            MessageLookupByLibrary.simpleMessage("تسجيل كزائر "),
-        "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب "),
+        "signUp": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
+        "signin": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "signinWithVistor": MessageLookupByLibrary.simpleMessage("تسجيل كزائر"),
+        "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
+        "totalprice": MessageLookupByLibrary.simpleMessage("ساعة الطلب"),
         "transaction": MessageLookupByLibrary.simpleMessage("معاملات مالية")
       };
 }

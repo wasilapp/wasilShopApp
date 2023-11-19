@@ -24,7 +24,7 @@ class SignInController extends GetxController {
 
     //URL
     var loginUrl = Uri.parse(
-        'https://news.wasiljo.com/public/api/v1/manager/login');
+        'https://news.wasiljo.com/public/api/v1/manager/login?lang=ar');
 
     //Body
     Map data = {
@@ -46,6 +46,7 @@ class SignInController extends GetxController {
 
 
       if (response.statusCode == 200) {
+        errorText.value='';
         log("i am is the success method");
         SharedPreferences sharedPreferences = await SharedPreferences
             .getInstance();

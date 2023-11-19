@@ -18,10 +18,10 @@ import 'generated/l10n.dart';
 Future<void> main() async {
 
   //You will need to initialize AppThemeNotifier class for theme changes.
-WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // await Firebase.initializeApp(
   //
   //  // options: DefaultFirebaseOptions.currentPlatform,
@@ -29,8 +29,8 @@ await Firebase.initializeApp(
   // SystemChrome.setPreferredOrientations(
   //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
   //     .then((_) async {
-    // String langCode = await AllLanguage.getLanguage();
-    // await Translator.load(langCode);
+  // String langCode = await AllLanguage.getLanguage();
+  // await Translator.load(langCode);
 
   runApp(ScopedModel<AppLanguage>(
     model: AppLanguage(),
@@ -52,25 +52,25 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // return Consumer<AppThemeNotifier>(
     //     builder: (BuildContext context, AppThemeNotifier value, Widget? child) {
-          return ScopedModelDescendant<AppLanguage>(builder: (context, child, model)
-          {
-            print('k');
-            print(model.appLocale);
-            return Sizer(builder: (context, orientation, deviceType) {
-              return
-                GetMaterialApp(
-                    locale: Locale('en'),
-                    supportedLocales: S.delegate.supportedLocales,
-                    localizationsDelegates: const [
-                      S.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                    ],
-                    debugShowCheckedModeBanner: false,
-                    // theme: AppTheme.getThemeFromThemeMode(value.themeMode()),
-                    home: const SplashScreen());
-            }, // class MyHomePage extends StatefulWidget {
+    return ScopedModelDescendant<AppLanguage>(builder: (context, child, model)
+    {
+      print('k');
+      print(model.appLocale);
+      return Sizer(builder: (context, orientation, deviceType) {
+        return
+          GetMaterialApp(
+              locale: Locale('ar'),
+              supportedLocales: S.delegate.supportedLocales,
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              debugShowCheckedModeBanner: false,
+              // theme: AppTheme.getThemeFromThemeMode(value.themeMode()),
+              home: const SplashScreen());
+      }, // class MyHomePage extends StatefulWidget {
 //   MyHomePage({Key? key}) : super(key: key);
 //
 //   @override
@@ -151,7 +151,7 @@ class _MyAppState extends State<MyApp> {
 //     );
 //   }
 // }
-            );
-          });}
+      );
+    });}
 
 }

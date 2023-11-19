@@ -18,7 +18,7 @@ class AppLanguage extends Model{
   Locale appLocale = Locale(Get.deviceLocale!.languageCode); // default ar
 
   void changeLanguage([String? lang]) {
-    appLocale=Locale(lang!);
+    appLocale=Locale('ar');
     Get.updateLocale(appLocale);
     // if (appLocale.languageCode == 'en') {
     //   appLocale = Locale('ar');
