@@ -533,7 +533,7 @@ Widget buildButton(){
           final dio = Dio(); // Create a Dio instance
           final formData = FormData();
           const url =
-              "https://news.wasiljo.com/public/api/v1/manager/register?lang=ar";
+              "https://admin.wasiljo.com/public/api/v1/manager/register?lang=ar";
           final headers = {
             "Accept": "application/json",
             "Content-Type": "application/json",
@@ -639,7 +639,7 @@ Widget buildButton(){
   // onPre;sed: () async {
   //       print("statr");
   //   try {
-  //     final respone= await http.post(Uri.parse("https://news.wasiljo.com/public/api/v1/manager/register"),
+  //     final respone= await http.post(Uri.parse("https://admin.wasiljo.com/public/api/v1/manager/register"),
   //     body: {
   //       'shop[name][en]': shopNameEnglish.text,
   //       'shop[name][ar]': shopNameArabic.text,

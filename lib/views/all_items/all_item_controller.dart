@@ -25,7 +25,7 @@ class ItemsController extends GetxController{
       'Authorization': 'Bearer $bearerToken'
     };
     var response =await http.post(
-        Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/remove/$id'),
+        Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/remove/$id'),
         headers: headers);
 
 
@@ -52,7 +52,7 @@ class ItemsController extends GetxController{
     var bearerToken =prefs.getString('token');
 
     final response = await http.get(Uri.parse(
-      'https://news.wasiljo.com/public/api/v1/manager/mySubCategories',
+      'https://admin.wasiljo.com/public/api/v1/manager/mySubCategories',
     ),    headers: {'Authorization': 'Bearer $bearerToken'},);
 
     if (response.statusCode == 200) {

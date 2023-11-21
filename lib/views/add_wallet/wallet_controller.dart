@@ -134,7 +134,7 @@ class SubCategoryController extends GetxController {
   Future<void> getSubCategory() async {
     statusModel.value.updateStatus(GeneralStatus.waiting);
     print('satat1');
-    var url = Uri.parse("https://news.wasiljo.com/public/api/v1/manager/mySubCategories");
+    var url = Uri.parse("https://admin.wasiljo.com/public/api/v1/manager/mySubCategories");
     SharedPreferences prefs =
     await SharedPreferences.getInstance();
     // Define the request headers

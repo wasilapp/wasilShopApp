@@ -54,7 +54,7 @@ print('ff');
     };
     print(type);
     print(selected);
-    var url = Uri.parse('https://news.wasiljo.com/public/api/v1/manager/orders/$selected/scheduled/get');
+    var url = Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/orders/$selected/scheduled/get');
     var response = await http.get(
       url,headers: headers
     );
@@ -101,7 +101,7 @@ print('ff');
     };
     print(type);
     print('type');
-    var url = Uri.parse('https://news.wasiljo.com/public/api/v1/manager/orders/all/urgent/get');
+    var url = Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/orders/all/urgent/get');
     var response = await http.get(
       url,headers: headers
     );
@@ -149,7 +149,7 @@ print(url);
 
     //URL
     var statusOrderUrl = Uri.parse(
-        'https://news.wasiljo.com/public/api/v1/manager/order/$id/$status');
+        'https://admin.wasiljo.com/public/api/v1/manager/order/$id/$status');
 print(statusOrderUrl);
 
 
@@ -214,7 +214,7 @@ getProducts();
 
     //URL
     var statusOrderUrl = Uri.parse(
-        'https://news.wasiljo.com/public/api/v1/manager/order/$orderId/assign-shop-to-delivery/$driverId');
+        'https://admin.wasiljo.com/public/api/v1/manager/order/$orderId/assign-shop-to-delivery/$driverId');
     print(statusOrderUrl);
 
 

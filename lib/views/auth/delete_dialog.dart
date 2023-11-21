@@ -51,7 +51,7 @@ class DeleteUserDialog extends StatelessWidget {
     var bearerToken=   prefs.getString('token');
 
 
-    var response = await http.post(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/delete'),
+    var response = await http.post(Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/delete'),
       headers: {'Authorization': 'Bearer $bearerToken'},);
 
     if(response.statusCode==200){

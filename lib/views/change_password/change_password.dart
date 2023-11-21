@@ -114,7 +114,7 @@
 //             print(contrycode.toString() + _numberController!.text);
 //             try {
 //               var respone = await http.post(Uri.parse(
-//                   'https://news.wasiljo.com/public/api/v1/manager/otp_mobile'),
+//                   'https://admin.wasiljo.com/public/api/v1/manager/otp_mobile'),
 //                   body: {
 //                     'mobile': contrycode.toString() + _numberController!.text
 //                   },

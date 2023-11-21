@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $bearerToken'
     };
-    var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'));
+    var request = http.Request('POST', Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/update_profile'));
     request.body = json.encode({
       // "manager": {
       //   "name": {
@@ -77,7 +77,7 @@ get() async {
   var bearerToken=sharedPreferences.getString('token');
 
   try {
-    var response = await http.get(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/shops'),
+    var response = await http.get(Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/shops'),
       headers: {'Authorization': 'Bearer $bearerToken'},);
     if (response.statusCode == 200) {
       var resData = jsonDecode(response.body);
@@ -232,7 +232,7 @@ MangerNavigator.of(context).pushReplacement(const LoginScreen());
 //   final Dio dio = Dio();
 //
 //   // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-//   final String apiUrl = 'https://news.wasiljo.com/public/api/v1/manager/shops';
+//   final String apiUrl = 'https://admin.wasiljo.com/public/api/v1/manager/shops';
 //
 //   // Replace 'YOUR_BEARER_TOKEN' with your actual Bearer Token
 //

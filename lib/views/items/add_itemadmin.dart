@@ -39,7 +39,7 @@ class _AddItemFromAdminState extends State<AddItemFromAdmin> {
     // fetchData();
   }
   Future<void> addItem(String categoryId) async {
-    final url = Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/select');
+    final url = Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/select');
 
     final Map<String, dynamic> body = {
       "subCategories": categoryId,
@@ -77,7 +77,7 @@ class _AddItemFromAdminState extends State<AddItemFromAdmin> {
   //     'Authorization': 'Bearer $bearerToken'
   //   };
   //   final response = await http.get(
-  //       Uri.parse('https://news.wasiljo.com/public/api/v1/manager/categories'),
+  //       Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/categories'),
   //     headers: headers
   //   );
   //
@@ -190,7 +190,7 @@ class _AddItemFromAdminState extends State<AddItemFromAdmin> {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer $bearerToken'
           };
-          var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/select'));
+          var request = http.Request('POST', Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/select'));
           request.body = json.encode([
             {
               "sub_category_id": selectedCategory!.id.toString(),

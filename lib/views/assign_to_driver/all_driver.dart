@@ -35,7 +35,7 @@ String? orderId;
     print(bearerToken);
     final response = await http.get(
       Uri.parse(
-          "https://news.wasiljo.com/public/api/v1/manager/delivery_boys/get_all"),
+          "https://admin.wasiljo.com/public/api/v1/manager/delivery_boys/get_all"),
       headers: {'Authorization': 'Bearer $bearerToken'},
     );
 

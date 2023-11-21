@@ -24,7 +24,7 @@ class SignInController extends GetxController {
 
     //URL
     var loginUrl = Uri.parse(
-        'https://news.wasiljo.com/public/api/v1/manager/login?lang=ar');
+        'https://admin.wasiljo.com/public/api/v1/manager/login?lang=ar');
 
     //Body
     Map data = {

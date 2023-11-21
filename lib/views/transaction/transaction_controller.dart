@@ -30,7 +30,7 @@ class TransactionController extends GetxController{
     var headers = {
       'Authorization': 'Bearer $bearerToken'
     };
-    var response =await http.get( Uri.parse('https://news.wasiljo.com/public/api/v1/manager/get_transaction_delivery_boys_orders_total',
+    var response =await http.get( Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/get_transaction_delivery_boys_orders_total',
        ) ,headers:headers);
 
 
@@ -98,7 +98,7 @@ else {
     var headers = {
       'Authorization': 'Bearer $bearerToken'
     };
-    var response =await http.get( Uri.parse('https://news.wasiljo.com/public/api/v1/manager/get_transaction_shop',
+    var response =await http.get( Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/get_transaction_shop',
        ) ,headers:headers);
 
 
@@ -168,7 +168,7 @@ else {
       'Authorization': 'Bearer $bearerToken'
     };
 
-    var response = await http.post( Uri.parse('https://news.wasiljo.com/public/api/v1/manager/get_orders_date_not_paid_cache/$id'),
+    var response = await http.post( Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/get_orders_date_not_paid_cache/$id'),
  body:{
       'startDate': startDate,
       'endDate': endDate
@@ -230,7 +230,7 @@ else {
 //       'startDate': '2023-11-13',
 //       'endDate': '2023-11-15'
 //     };
-//     var response =await http.post( Uri.parse('https://news.wasiljo.com/public/api/v1/manager/get_orders_date_not_paid_cache/$id',
+//     var response =await http.post( Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/get_orders_date_not_paid_cache/$id',
 //        ) ,headers:headers,body: json.encode(body));
 //
 //

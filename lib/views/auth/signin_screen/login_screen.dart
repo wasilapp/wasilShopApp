@@ -256,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
 // //   if (_formKey.currentState!.validate()) {
 // //     try {
 // //       final response = await http.post(
-// //           Uri.parse('https://news.wasiljo.com/public/api/v1/manager/login'),
+// //           Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/login'),
 // //           body: {
 // //             'mobile': countryCode.toString() + _numberController!.text,
 // //             'password': passwordTFController!.text
@@ -287,7 +287,7 @@ class _LoginScreenState extends State<LoginScreen> {
 // // //
 // // //   // Define the API endpoint URL
 // // //   const url =
-// // //   "https://news.wasiljo.com/public/api/v1/manager/login";
+// // //   "https://admin.wasiljo.com/public/api/v1/manager/login";
 // // //
 // // //   // Define the request headers
 // // //   final headers = {

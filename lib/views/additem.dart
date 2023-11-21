@@ -73,7 +73,7 @@ class _AddItemState extends State<AddItem> {
     var bearerToken =prefs.getString('token');
 
     final response = await http.get(Uri.parse(
-      'https://news.wasiljo.com/public/api/v1/manager/mySubCategories',
+      'https://admin.wasiljo.com/public/api/v1/manager/mySubCategories',
     ),    headers: {'Authorization': 'Bearer $bearerToken'},);
 
     if (response.statusCode == 200) {
@@ -95,7 +95,7 @@ class _AddItemState extends State<AddItem> {
     var bearerToken =prefs.getString('token');
 
     final response = await http.get(Uri.parse(
-      'https://news.wasiljo.com/public/api/v1/manager/my-wallets',
+      'https://admin.wasiljo.com/public/api/v1/manager/my-wallets',
     ),    headers: {'Authorization': 'Bearer $bearerToken'},);
 
     if (response.statusCode == 200) {
@@ -359,7 +359,7 @@ class _AddItemState extends State<AddItem> {
 
            // Define the API endpoint URL
            const url =
-               "https://news.wasiljo.com/public/api/v1/manager/mySubCategories";
+               "https://admin.wasiljo.com/public/api/v1/manager/mySubCategories";
            SharedPreferences prefs =
            await SharedPreferences.getInstance();
            // Define the request headers

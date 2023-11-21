@@ -184,7 +184,7 @@ controller.getTransactionId(id:widget.id,startDate:startInput,endDate: endInput 
                                   'Content-Type': 'application/json',
                                   'Authorization': 'Bearer $bearerToken'
                                 };
-                                var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/paid_orders/${widget.id}'));
+                                var request = http.Request('POST', Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/paid_orders/${widget.id}'));
                                 request.body = json.encode({
                                   "total": controller.total.value,
                                   "from_date": startInput,
@@ -272,7 +272,7 @@ controller.getTransactionId(id:widget.id,startDate:startInput,endDate: endInput 
       'startDate':startDate,
       'endDate': endDate
     };
-    var response =await http.post( Uri.parse('https://news.wasiljo.com/public/api/v1/manager/get_orders_date_not_paid_cache/$id',
+    var response =await http.post( Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/get_orders_date_not_paid_cache/$id',
     ) ,headers:headers,body: json.encode(body));
 
 
@@ -348,7 +348,7 @@ print("***********************");
       'Authorization': 'Bearer $bearerToken'
     };
     
-    var response =await http.post(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/paid_orders/$id',
+    var response =await http.post(Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/paid_orders/$id',
     ) ,headers:headers,
     body: json.encode({
       "total": total,

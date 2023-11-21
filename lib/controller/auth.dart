@@ -95,7 +95,7 @@ class AuthController {
 
     try {
       final response = await dio.post(
-     "https://news.wasiljo.com/public/api/v1/manager/register",
+     "https://admin.wasiljo.com/public/api/v1/manager/register",
         data: formData ,
         options: Options(headers: headers),
       );

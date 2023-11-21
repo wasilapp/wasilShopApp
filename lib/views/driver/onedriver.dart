@@ -173,7 +173,7 @@ const Spacer(),
 //     var bearerToken=   prefs.getString('token');
 //     final response = await http.delete(
 //     Uri.parse(
-//     "https://news.wasiljo.com/public/api/v1/manager/delivery_boys/delete/${widget.driver['id']}"),
+//     "https://admin.wasiljo.com/public/api/v1/manager/delivery_boys/delete/${widget.driver['id']}"),
 //     headers: {'Authorization': 'Bearer $bearerToken'},
 //     );
 //

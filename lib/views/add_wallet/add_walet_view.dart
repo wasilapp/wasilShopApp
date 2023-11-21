@@ -316,7 +316,7 @@ class _AddNewWalletState extends State<AddNewWallet> {
 
                   // Define the API endpoint URL
                   const url =
-                      "https://news.wasiljo.com/public/api/v1/manager/wallets";
+                      "https://admin.wasiljo.com/public/api/v1/manager/wallets";
                   SharedPreferences prefs =
                   await SharedPreferences.getInstance();
                   // Define the request headers

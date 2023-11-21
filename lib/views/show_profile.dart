@@ -74,7 +74,7 @@ class _MyProfileState extends State<MyProfile> {
     var bearerToken=sharedPreferences.getString('token');
 
     try {
-      var response = await http.get(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/shops'),
+      var response = await http.get(Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/shops'),
         headers: {'Authorization': 'Bearer $bearerToken'},);
       if (response.statusCode == 200) {
         var resData = jsonDecode(response.body);

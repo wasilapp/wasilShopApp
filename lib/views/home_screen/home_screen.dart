@@ -56,7 +56,7 @@ late TabController controller;
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $bearerToken'
     };
-    var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'));
+    var request = http.Request('POST', Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/update_profile'));
     request.body = json.encode({
       // "manager": {
       //   "name": {

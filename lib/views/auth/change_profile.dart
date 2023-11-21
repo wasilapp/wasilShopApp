@@ -222,7 +222,7 @@ class _ChangeProfileState extends State<ChangeProfile> {
     var bearerToken=sharedPreferences.getString('token');
 
     try {
-      var response = await http.get(Uri.parse('https://news.wasiljo.com/public/api/v1/manager/shops'),
+      var response = await http.get(Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/shops'),
         headers: {'Authorization': 'Bearer $bearerToken'},);
       if (response.statusCode == 200) {
         var resData = jsonDecode(response.body);
@@ -255,7 +255,7 @@ class _ChangeProfileState extends State<ChangeProfile> {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $bearerToken'
     };
-    var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'));
+    var request = http.Request('POST', Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/update_profile'));
     request.body = json.encode({
       "manager": {
         "name": {
@@ -290,7 +290,7 @@ class _ChangeProfileState extends State<ChangeProfile> {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $bearerToken'
       };
-      var request = http.Request('POST', Uri.parse('https://news.wasiljo.com/public/api/v1/manager/update_profile'));
+      var request = http.Request('POST', Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/update_profile'));
       request.body = json.encode({
         // "manager": {
         //   "name": {

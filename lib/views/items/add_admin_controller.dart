@@ -33,7 +33,7 @@ var subCategoriesPendung = [].obs;
     };
     statusModel.value.updateStatus(GeneralStatus.waiting);
     var url = Uri.parse(
-        "https://news.wasiljo.com/public/api/v1/manager/categories");
+        "https://admin.wasiljo.com/public/api/v1/manager/categories");
     var response= await http.get(url, headers: headers);
     if((response.statusCode>=200&& response.statusCode<300)){
       if(response.body.isEmpty){
@@ -66,7 +66,7 @@ log('lllllllllllllllllllllllllll');
     var bearerToken =prefs.getString('token');
 
     final response = await http.get(Uri.parse(
-      'https://news.wasiljo.com/public/api/v1/manager/mySubCategories',
+      'https://admin.wasiljo.com/public/api/v1/manager/mySubCategories',
     ),    headers: {'Authorization': 'Bearer $bearerToken'},);
 
     if (response.statusCode == 200) {
@@ -88,7 +88,7 @@ fetchWalletCategories() async {
     var bearerToken =prefs.getString('token');
 
     final response = await http.get(Uri.parse(
-      'https://news.wasiljo.com/public/api/v1/manager/my-wallets',
+      'https://admin.wasiljo.com/public/api/v1/manager/my-wallets',
     ),    headers: {'Authorization': 'Bearer $bearerToken'},);
 
     if (response.statusCode == 200) {

@@ -38,7 +38,7 @@ class _DriverState extends State<Driver> {
     print(bearerToken);
     final response = await http.get(
       Uri.parse(
-          "https://news.wasiljo.com/public/api/v1/manager/delivery_boys/get_all"),
+          "https://admin.wasiljo.com/public/api/v1/manager/delivery_boys/get_all"),
       headers: {'Authorization': 'Bearer $bearerToken'},
     );
 
@@ -270,7 +270,7 @@ SizedBox(height: 2.h,),
                                     var bearerToken=   prefs.getString('token');
                                     final response = await http.get(
                                       Uri.parse(
-                                          "https://news.wasiljo.com/public/api/v1/manager/delivery_boys_requests/accept/${driver['id']}"),
+                                          "https://admin.wasiljo.com/public/api/v1/manager/delivery_boys_requests/accept/${driver['id']}"),
                                       headers: {'Authorization': 'Bearer $bearerToken'},
                                     );
 
@@ -312,7 +312,7 @@ SizedBox(height: 2.h,),
                                     var bearerToken=   prefs.getString('token');
                                     final response = await http.get(
                                       Uri.parse(
-                                          "https://news.wasiljo.com/public/api/v1/manager/delivery_boys_requests/decline/${driver['id']}"),
+                                          "https://admin.wasiljo.com/public/api/v1/manager/delivery_boys_requests/decline/${driver['id']}"),
                                       headers: {'Authorization': 'Bearer $bearerToken'},
                                     );
 

@@ -510,7 +510,7 @@ class _AddDriverState extends State<AddDriver> {
 
                         // Define the API endpoint URL
                         const url =
-                            "https://news.wasiljo.com/public/api/v1/manager/delivery_boys/create?lang=ar";
+                            "https://admin.wasiljo.com/public/api/v1/manager/delivery_boys/create?lang=ar";
 
                         // Define the request headers
                         SharedPreferences prefs= await SharedPreferences.getInstance();

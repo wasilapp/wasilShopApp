@@ -37,7 +37,7 @@ class _AllItemsState extends State<AllItems> {
     var bearerToken =prefs.getString('token');
 
     final response = await http.get(Uri.parse(
-      'https://news.wasiljo.com/public/api/v1/manager/mySubCategories',
+      'https://admin.wasiljo.com/public/api/v1/manager/mySubCategories',
     ),    headers: {'Authorization': 'Bearer $bearerToken'},);
 
     if (response.statusCode == 200) {
@@ -62,7 +62,7 @@ class _AllItemsState extends State<AllItems> {
   //   var bearerToken =prefs.getString('token');
   //
   //   final response = await http.get(Uri.parse(
-  //     'https://news.wasiljo.com/public/api/v1/manager/my-wallets',
+  //     'https://admin.wasiljo.com/public/api/v1/manager/my-wallets',
   //   ),    headers: {'Authorization': 'Bearer $bearerToken'},);
   //
   //   if (response.statusCode == 200) {
@@ -89,7 +89,7 @@ class _AllItemsState extends State<AllItems> {
     var bearerToken =prefs.getString('token');
 
     final response = await http.get(Uri.parse(
-        'https://news.wasiljo.com/public/api/v1/manager/my-wallets',
+        'https://admin.wasiljo.com/public/api/v1/manager/my-wallets',
     ),    headers: {'Authorization': 'Bearer $bearerToken'},);
 
     if (response.statusCode == 200) {
@@ -345,7 +345,7 @@ Widget buildActiveItem(  subCategoryList,wallet) {
 //                                 const SizedBox(width: 10,),
 //                                          InkWell(
 //                                   onTap: () async {
-//                                     print('https://news.wasiljo.com/public/api/v1/manager/subcategories/show-hide/');
+//                                     print('https://admin.wasiljo.com/public/api/v1/manager/subcategories/show-hide/');
 //
 //                                     SharedPreferences prefs =
 //                                         await SharedPreferences.getInstance();
@@ -354,7 +354,7 @@ Widget buildActiveItem(  subCategoryList,wallet) {
 //                                     var headers = {
 //                                       'Authorization': 'Bearer $bearerToken'
 //                                     };
-//                                     var response =  await http.post( Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/show-hide/${subCategory.id}/${subCategory.pivot!.isShow}}'),
+//                                     var response =  await http.post( Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/show-hide/${subCategory.id}/${subCategory.pivot!.isShow}}'),
 //                                     headers: headers);
 //
 //
@@ -430,7 +430,7 @@ Widget buildActiveItem(  subCategoryList,wallet) {
                             'Authorization': 'Bearer $bearerToken'
                           };
                           var response =await http.post(
-                              Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/remove/${subCategory['id']}'),
+                              Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/remove/${subCategory['id']}'),
                               headers: headers);
 
 
@@ -488,7 +488,7 @@ Widget buildActiveItem(  subCategoryList,wallet) {
                       //     setState(() {
                       //       status    =subCategory['pivot']['is_show']=='show'?'hidden':'show';
                       //     });
-                      //     var url=Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/show-hide/${subCategory['id']}/$status');
+                      //     var url=Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/show-hide/${subCategory['id']}/$status');
                       //     print(url);
                       //     SharedPreferences prefs =
                       //     await SharedPreferences.getInstance();
@@ -576,7 +576,7 @@ Widget buildActiveItem(  subCategoryList,wallet) {
                             'Authorization': 'Bearer $bearerToken'
                           };
                           var response =await http.post(
-                              Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/remove/${subCategory['id']}?lang=ar'),
+                              Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/remove/${subCategory['id']}?lang=ar'),
                               headers: headers);
 
 
@@ -634,7 +634,7 @@ Widget buildActiveItem(  subCategoryList,wallet) {
                                   setState(() {
                                     status    =subCategory['pivot']['is_show']=='show'?'hidden':'show';
                                   });
-var url=Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/show-hide/${subCategory['id']}/$status');
+var url=Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/show-hide/${subCategory['id']}/$status');
 print(url);
                                     SharedPreferences prefs =
                                         await SharedPreferences.getInstance();
@@ -754,7 +754,7 @@ print(url);
 //                                 const SizedBox(width: 10,),
 //                                          InkWell(
 //                                   onTap: () async {
-//                                     print('https://news.wasiljo.com/public/api/v1/manager/subcategories/show-hide/');
+//                                     print('https://admin.wasiljo.com/public/api/v1/manager/subcategories/show-hide/');
 //
 //                                     SharedPreferences prefs =
 //                                         await SharedPreferences.getInstance();
@@ -763,7 +763,7 @@ print(url);
 //                                     var headers = {
 //                                       'Authorization': 'Bearer $bearerToken'
 //                                     };
-//                                     var response =  await http.post( Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/show-hide/${subCategory.id}/${subCategory.pivot!.isShow}}'),
+//                                     var response =  await http.post( Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/show-hide/${subCategory.id}/${subCategory.pivot!.isShow}}'),
 //                                     headers: headers);
 //
 //
@@ -837,7 +837,7 @@ print(url);
                       //       'Authorization': 'Bearer $bearerToken'
                       //     };
                       //     var response =await http.post(
-                      //         Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/remove/4'),
+                      //         Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/remove/4'),
                       //         headers: headers);
                       //
                       //
@@ -925,7 +925,7 @@ print(url);
                       //       'Authorization': 'Bearer $bearerToken'
                       //     };
                       //     var response =await http.post(
-                      //         Uri.parse('https://news.wasiljo.com/public/api/v1/manager/subcategories/remove/4'),
+                      //         Uri.parse('https://admin.wasiljo.com/public/api/v1/manager/subcategories/remove/4'),
                       //         headers: headers);
                       //
                       //
